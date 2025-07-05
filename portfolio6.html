@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Devadharshini Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --main-color: #6a11cb;
+        --sec-color: #2575fc;
+        --bg-color: #f5f5f5;
+        --text-color: #333;
+        --card-bg: #fff;
+    }
+    body.dark {
+        --bg-color: #121212;
+        --text-color: #f5f5f5;
+        --card-bg: #1e1e1e;
+    }
+    * {box-sizing: border-box; margin: 0; padding: 0;}
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        transition: background 0.3s, color 0.3s;
+    }
+    header {
+        background: linear-gradient(135deg, var(--main-color), var(--sec-color));
+        color: #fff;
+        padding: 80px 20px;
+        text-align: center;
+    }
+    header button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: #fff;
+        color: var(--main-color);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s, color 0.3s;
+    }
+    header button:hover {
+        background: var(--sec-color);
+        color: #fff;
+    }
+    nav {
+        position: sticky;
+        top: 0;
+        background: var(--card-bg);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        padding: 15px;
+    }
+    nav ul li {margin: 0 20px;}
+    nav ul li a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+    nav ul li a:hover {color: var(--sec-color);}
+    section {
+        padding: 80px 20px;
+        max-width: 1100px;
+        margin: auto;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s;
+    }
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .about, .skills {text-align: center;}
+    .skills {margin-top: 40px;}
+    .skill-bar {
+        background: #ddd;
+        border-radius: 25px;
+        overflow: hidden;
+        margin: 15px auto;
+        max-width: 400px;
+    }
+    .skill-bar div {
+        height: 20px;
+        width: 0;
+        background: var(--sec-color);
+        border-radius: 25px;
+        transition: width 1.5s ease;
+    }
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+    .project.card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 30px;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+    .project.card:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, var(--main-color), var(--sec-color));
+        color: #fff;
+    }
+    .project.card h3 {margin-bottom: 10px;}
+    .project.card p {font-size: 0.95em;}
+    .project.card ul {
+        text-align: left;
+        margin: 15px 0;
+        padding-left: 20px;
+    }
+    .project.card ul li {
+        margin-bottom: 8px;
+        font-size: 0.9em;
+    }
+    .project.card a.btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: var(--sec-color);
+        color: #fff;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+    .project.card a.btn:hover {
+        background: var(--main-color);
+    }
+    .certifications {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+        text-align: center;
+    }
+    .cert-card {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+    .cert-card:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, var(--main-color), var(--sec-color));
+        color: #fff;
+    }
+    .cert-card h4 {
+        margin-bottom: 15px;
+        font-size: 1.1em;
+    }
+    .cert-card a.btn {
+        display: inline-block;
+        padding: 8px 18px;
+        background: var(--sec-color);
+        color: #fff;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+    .cert-card a.btn:hover {
+        background: var(--main-color);
+    }
+    .contact form {
+        max-width: 500px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .contact input, .contact textarea {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: var(--card-bg);
+        color: var(--text-color);
+    }
+    .contact button {
+        padding: 15px;
+        background: var(--sec-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+    }
+    .contact button:hover {
+        background: var(--main-color);
+        transform: scale(1.05);
+    }
+    footer {
+        background: var(--card-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 50px;
+    }
+    @media(max-width: 600px){
+        nav ul { flex-direction: column; }
+        nav ul li { margin: 10px 0; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>I'm Devadharshini</h1>
+    <p>Developer • Data Analyst • ML Enthusiast</p>
+    <button onclick="downloadResume()">Download Resume</button>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="javascript:void(0);" onclick="toggleDark()">🌙</a></li>
+    </ul>
+</nav>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+        I am a motivated Computer Science Engineering student passionate about building innovative solutions.
+        I explore web development, data analytics, machine learning, circuit design, and currently working on 
+        a research paper involving RTC & Fourier Transforms. Pursuing multiple internships to grow practically 
+        in diverse tech domains.
+    </p>
+    <div class="skills">
+        <div><h4>HTML, CSS & JavaScript</h4><div class="skill-bar"><div data-width="90%"></div></div></div>
+        <div><h4>Python & Machine Learning</h4><div class="skill-bar"><div data-width="80%"></div></div></div>
+        <div><h4>MongoDB & Node.js</h4><div class="skill-bar"><div data-width="70%"></div></div></div>
+        <div><h4>Data Analysis Tools</h4><div class="skill-bar"><div data-width="75%"></div></div></div>
+        <div><h4>Circuit Design & Testing</h4><div class="skill-bar"><div data-width="65%"></div></div></div>
+    </div>
+</section>
+
+<section id="projects">
+    <h2>My Projects & Experiences</h2>
+    <div class="projects">
+
+        <div class="project card">
+            <h3>Fake News Detector</h3>
+            <p>Done as part of AICTE-Edunet internship. Classifies news with Logistic & BERT models.</p>
+            <ul>
+                <li><strong>Tech:</strong> Python, Scikit-learn, Transformers</li>
+            </ul>
+            <a href="https://github.com/Devadharshini3612/Fake-news-detector" class="btn" target="_blank">View Github</a>
+        </div>
+        <div class="project card">
+            <h3>World Happiness Index</h3>
+            <p>Published article using KNIME to analyze happiness data globally.</p>
+            <ul>
+                <li><strong>Tools:</strong> KNIME, Python APIs</li>
+            </ul>
+            <a href="KNIME Article World happiness report using LLM Nodes.docx" class="btn" target="_blank">View Analysis PDF</a>
+        </div>
+        <div class="project card">
+            <h3>Circuit Design Internship</h3>
+            <p>Designed circuits during IIT Bombay FOSSEE internship using eSIM.</p>
+            <ul>
+                <li>Built analog circuit prototypes for academic research</li>
+            </ul>
+            <a href="Analysis_of_ Self Balancing_ Circuit _Using _OPAMP _for_ Sensor _Calibration.docx" class="btn" target="_blank">View Project</a>
+        </div>
+        <div class="project card">
+            <h3>Maintenance Tracker</h3>
+            <p>Role-based  maintenace complaint management app for college level hackathonr.</p>
+            <ul>
+                <li><strong>Tech:</strong> Node.js, Express, MongoDB</li>
+                <li><strong>Features:</strong> Dashboards, secure login, complaint status</li>
+            </ul>
+            <a href="Tracker certificate.pdf" class="btn" target="_blank">View Certificate PDF</a>
+        </div>
+        <div class="project card">
+            <h3>Research Paper</h3>
+            <p>Working on RTC & Fourier Transforms for complex signal processing.</p>
+            <ul>
+                <li>Expected publication this semester</li>
+            </ul>
+            <a href="Smart Water Level Monitoring And Alert System Using Rador Sensors.docx" class="btn" target="_blank">View Abstract PDF</a>
+        </div>
+                <div class="project card">
+            <h3>Ongoing Internships</h3>
+            <p>Currently interning at Code Alpha, Cognify, and 1M1B.</p>
+            <ul>
+                <li>Building skills in software, data analytics & social tech</li>
+            </ul>
+            <a href="https://www.linkedin.com/in/deva-dharshini-a0b22432a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="btn" target="_blank">View LinkedIn</a>
+        </div>
+
+    </div>
+</section>
+
+<section id="certifications">
+    <h2>Certifications</h2>
+    <div class="certifications">
+        <div class="cert-card">
+            <h4>AICTE Edunet Microsoft Internship</h4>
+            <a href="edunet1.pdf" class="btn" target="_blank">View Certificate</a>
+        </div>
+        <div class="cert-card">
+            <h4>FOSSEE IIT Bombay</h4>
+            <a href="Devadharshinim-esim-Research-Migration-Certificate.pdf" class="btn" target="_blank">View Certificate</a>
+        </div>
+        <div class="cert-card">
+            <h4>Other course completion certifications</h4>
+            <a href="https://www.linkedin.com/in/deva-dharshini-a0b22432a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="btn" target="_blank">View through linkedin</a>
+        </div>
+        
+           
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required/>
+        <input type="email" placeholder="Your Email" required/>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    &copy; 2025 Devadharshini | Portfolio
+</footer>
+
+<script>
+    const sections = document.querySelectorAll("section");
+    const skillBars = document.querySelectorAll(".skill-bar div");
+    window.addEventListener("scroll", () => {
+        const trigger = window.innerHeight * 0.85;
+        sections.forEach(sec => {
+            if(sec.getBoundingClientRect().top < trigger) sec.classList.add("visible");
+        });
+        skillBars.forEach(bar => {
+            const rect = bar.parentElement.getBoundingClientRect();
+            if(rect.top < trigger) bar.style.width = bar.getAttribute("data-width");
+        });
+    });
+    function toggleDark(){ document.body.classList.toggle("dark"); }
+    function downloadResume(){ window.open("resume.pdf", "_blank"); }
+</script>
+
+</body>
+</html>
